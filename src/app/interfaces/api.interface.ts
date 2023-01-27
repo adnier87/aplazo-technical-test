@@ -1,21 +1,21 @@
-export interface Info {
+export interface IInfo {
     count: number;
     pages: number;
     next: number;
     prev?: any;
 }
 
-export interface Location {
+export interface ILocation {
     id: string;
     name: string;
 }
 
-export interface Episode {
+export interface IEpisode {
     id: string;
     episode: string;
 }
 
-export interface Result {
+export interface IResult {
     id: string;
     name: string;
     image: string;
@@ -23,11 +23,11 @@ export interface Result {
     episode: Episode[];
 }
 
-export interface Characters {
+export interface ICharacters {
     info: Info;
     results: Result[];
 }
 
-export interface CharactersResponse {
+export interface ICharactersResponse {
     data: Characters;
 }
