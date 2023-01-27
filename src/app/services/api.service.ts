@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Apollo } from 'apollo-angular';
 
 import { GET_CHARACTERS } from '../utils/queries';
 import { CharactersResponse } from '../interfaces/api.interface';
@@ -10,18 +10,14 @@ import { CharactersResponse } from '../interfaces/api.interface';
 })
 export class ApiService {
 
-  private baseUrl : string = 'https://rickandmortyapi.com'
-
-  constructor(private httpClient : HttpClient) { }
+  constructor(private apollo : Apollo) {}
 
   getCharacters(page : number) : Observable<CharactersResponse> {
-    return this.httpClient.post<CharactersResponse>(
-      this.baseUrl, {
-        GET_CHARACTERS,
-        variables: {
-          page
-        }
+    return this.apollo.watchQuery<any>({
+      query: GET_CHARACTERS,
+      variables: {
+        page
       }
-    )
+    }).valueChanges
   }
 }
