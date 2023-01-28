@@ -1,5 +1,11 @@
-<div *ngIf="hasCharacters()" class="container d-flex flex-wrap justify-content-between">
-    <ng-container *ngFor="let item of characters">
-        <app-character class="my-3" [character]="item"></app-character>
-    </ng-container>
-</div>
+<ng-container *ngIf="hasCharacters()">
+    <div class="container d-flex flex-wrap justify-content-between">
+        <ng-container *ngFor="let item of characters">
+            <app-character class="my-3" [character]="item"></app-character>
+        </ng-container>
+    </div>
+    <div class="d-grid col-6 my-5 mx-auto">
+        <button class="btn btn-lg btn-outline-primary" *ngIf="next" (click)="loadMore()">Load more...</button>
+    </div>
+</ng-container>
+

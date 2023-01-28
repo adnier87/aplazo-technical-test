@@ -14,12 +14,7 @@ export const GET_CHARACTERS = gql`
               name
               image
               location {
-                id
                 name
-              }
-              episode {
-                id
-                episode
               }
             }
         }

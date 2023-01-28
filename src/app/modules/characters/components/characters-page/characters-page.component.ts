@@ -13,6 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class CharactersPageComponent implements OnInit, OnDestroy {
   private unsubscriber : Subject<void> = new Subject();
+  next : number | null = 1;
   characters : ICharacter[] = []
 
   constructor(
@@ -20,16 +21,28 @@ export class CharactersPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.api.getCharacters(1)
+    this.fetchCharacters(this.next as number)
+  }
+
+  private fetchCharacters(page : number) : void {
+    this.api.getCharacters(page)
       .pipe(
         takeUntil(this.unsubscriber),
         map((result : ICharactersResponse) => result.data)
       )
-      .subscribe((response : IResultData) => this.characters = response.characters.results)
+      .subscribe((response : IResultData) => {
+        this.characters = this.characters.concat(response.characters.results);
+        this.next = response.characters.info.next
+      })
   }
 
   hasCharacters() : boolean {
     return !_.isEmpty(this.characters)
+  }
+
+  loadMore() : void {
+    if (this.next)
+      this.fetchCharacters(this.next)
   }
 
   ngOnDestroy(): void {
