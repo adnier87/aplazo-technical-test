@@ -1,8 +1,8 @@
 export interface IInfo {
     count: number;
     pages: number;
-    next: number;
-    prev?: any;
+    next: number | null;
+    prev: number | null;
 }
 
 export interface ILocation {
@@ -34,18 +34,14 @@ export interface ICharactersData {
     results: ICharacter[];
 }
 
-export interface IResultData {
+export interface ICharactersResponse {
     characters : ICharactersData
 }
 
-export interface ICharactersResponse {
-    data: IResultData;
-}
-
-export interface ICharacterData {
+export interface ICharacterResponse {
     character: ICharacter
 }
 
-export interface ICharacterResponse {
-    data: ICharacterData
+export interface IAPIResponse {
+    data : ICharactersResponse | ICharacterResponse
 }

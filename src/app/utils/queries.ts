@@ -43,3 +43,28 @@ export const GET_CHARACTER = gql`
     }
   }
 `;
+
+export const GET_LOCATIONS = gql`
+query getLocations($page : Int!) {
+  {
+    locations(page: 1) {
+      info{
+        pages
+        next
+      }
+      results{
+        id
+        name
+        dimension
+        residents{
+          name
+          image
+          location {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+`;

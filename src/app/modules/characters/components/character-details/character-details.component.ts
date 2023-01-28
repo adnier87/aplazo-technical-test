@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Subject, takeUntil } from 'rxjs';
-import { ICharacter, ICharacterData, ICharacterResponse } from 'src/app/interfaces/api.interface';
+import { IAPIResponse, ICharacter, ICharacterResponse } from 'src/app/interfaces/api.interface';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -25,9 +25,9 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
       this.api.getCharacter(+this.id)
         .pipe(
           takeUntil(this.unsubscriber),
-          map((response : ICharacterResponse) => response.data)
+          map((response : IAPIResponse) => response.data)
         )
-        .subscribe((response : ICharacterData) => this.character = response.character)
+        .subscribe(response => this.character = (response as ICharacterResponse).character)
     }
   }
 
