@@ -13,6 +13,7 @@ export interface ILocation {
 export interface IEpisode {
     id: string;
     episode: string;
+    name: string;
 }
 
 export interface ICharacter {
@@ -20,7 +21,12 @@ export interface ICharacter {
     name: string;
     image: string;
     location: ILocation;
+    status: string;
+    species: string;
+    type: string;
+    gender: string;
     episode: IEpisode[];
+    origin: ILocation;
 }
 
 export interface ICharactersData {
@@ -34,4 +40,12 @@ export interface IResultData {
 
 export interface ICharactersResponse {
     data: IResultData;
+}
+
+export interface ICharacterData {
+    character: ICharacter
+}
+
+export interface ICharacterResponse {
+    data: ICharacterData
 }
