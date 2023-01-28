@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { Subject, map } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ICharactersResponse, ICharacter, IResultData } from 'src/app/interfaces/api.interface';
+import { IAPIResponse, ICharacter, ICharacterResponse, ICharactersResponse } from 'src/app/interfaces/api.interface';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -28,11 +28,11 @@ export class CharactersPageComponent implements OnInit, OnDestroy {
     this.api.getCharacters(page)
       .pipe(
         takeUntil(this.unsubscriber),
-        map((result : ICharactersResponse) => result.data)
+        map((result : IAPIResponse) => result.data)
       )
-      .subscribe((response : IResultData) => {
-        this.characters = this.characters.concat(response.characters.results);
-        this.next = response.characters.info.next
+      .subscribe(response => {
+        this.characters = this.characters.concat((response as ICharactersResponse).characters.results);
+        this.next = (response as ICharactersResponse).characters.info.next
       })
   }
 

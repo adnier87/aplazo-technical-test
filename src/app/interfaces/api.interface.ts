@@ -1,13 +1,15 @@
 export interface IInfo {
     count: number;
     pages: number;
-    next: number;
-    prev?: any;
+    next: number | null;
+    prev: number | null;
 }
 
 export interface ILocation {
     id: string;
     name: string;
+    dimension : string;
+    residents : ICharacter[]
 }
 
 export interface IEpisode {
@@ -34,18 +36,21 @@ export interface ICharactersData {
     results: ICharacter[];
 }
 
-export interface IResultData {
-    characters : ICharactersData
+export interface ILocationsResponse {
+    locations : {
+        info : IInfo,
+        results : ILocation[]
+    }
 }
 
 export interface ICharactersResponse {
-    data: IResultData;
-}
-
-export interface ICharacterData {
-    character: ICharacter
+    characters : ICharactersData
 }
 
 export interface ICharacterResponse {
-    data: ICharacterData
+    character: ICharacter
+}
+
+export interface IAPIResponse {
+    data : ICharactersResponse | ICharacterResponse | ILocationsResponse
 }
