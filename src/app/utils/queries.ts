@@ -12,6 +12,7 @@ export const GET_CHARACTERS = gql`
             results {
               id
               name
+              image
               location {
                 id
                 name

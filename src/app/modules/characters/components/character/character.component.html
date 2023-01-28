@@ -1,1 +1,10 @@
-<p>character works!</p>
+<a [routerLink]="'/characters/' + character.id">
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" [src]="character.image" [alt]="character.name + ' image'" />
+        <div class="card-body">
+            <h5 class="card-title">{{ character.name }}</h5>
+            <h6>Location</h6>
+            <p class="card-text">{{ character.location.name }}</p>
+        </div>
+    </div>
+</a>

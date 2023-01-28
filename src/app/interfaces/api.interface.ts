@@ -15,19 +15,23 @@ export interface IEpisode {
     episode: string;
 }
 
-export interface IResult {
+export interface ICharacter {
     id: string;
     name: string;
     image: string;
-    location: Location;
-    episode: Episode[];
+    location: ILocation;
+    episode: IEpisode[];
 }
 
-export interface ICharacters {
-    info: Info;
-    results: Result[];
+export interface ICharactersData {
+    info: IInfo;
+    results: ICharacter[];
+}
+
+export interface IResultData {
+    characters : ICharactersData
 }
 
 export interface ICharactersResponse {
-    data: Characters;
+    data: IResultData;
 }
