@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/characters/characters.module').then(m => m.CharactersModule)
   },
   {
-    path: 'location', 
+    path: 'locations', 
     loadChildren: () => import('./modules/locations/locations.module').then(m => m.LocationsModule)
   },
   {

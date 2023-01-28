@@ -46,22 +46,20 @@ export const GET_CHARACTER = gql`
 
 export const GET_LOCATIONS = gql`
 query getLocations($page : Int!) {
-  {
-    locations(page: 1) {
-      info{
-        pages
-        next
-      }
-      results{
-        id
+  locations(page: $page) {
+    info{
+      pages
+      next
+    }
+    results{
+      id
+      name
+      dimension
+      residents{
         name
-        dimension
-        residents{
+        image
+        location {
           name
-          image
-          location {
-            name
-          }
         }
       }
     }

@@ -8,6 +8,8 @@ export interface IInfo {
 export interface ILocation {
     id: string;
     name: string;
+    dimension : string;
+    residents : ICharacter[]
 }
 
 export interface IEpisode {
@@ -34,6 +36,13 @@ export interface ICharactersData {
     results: ICharacter[];
 }
 
+export interface ILocationsResponse {
+    locations : {
+        info : IInfo,
+        results : ILocation[]
+    }
+}
+
 export interface ICharactersResponse {
     characters : ICharactersData
 }
@@ -43,5 +52,5 @@ export interface ICharacterResponse {
 }
 
 export interface IAPIResponse {
-    data : ICharactersResponse | ICharacterResponse
+    data : ICharactersResponse | ICharacterResponse | ILocationsResponse
 }

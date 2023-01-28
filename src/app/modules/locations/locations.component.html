@@ -1,1 +1,18 @@
-<p>locations works!</p>
+<ng-container *ngIf="hasLocatiosn()">
+    <div class="container d-flex flex-wrap">
+        <ng-container *ngFor="let item of locations">
+            <div class="col-3 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <h6>Dimension: </h6>{{ item.dimension }}
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="d-grid col-6 my-5 mx-auto">
+        <button class="btn btn-lg btn-outline-primary" *ngIf="nextPage" (click)="loadMore()">Load more...</button>
+    </div>
+</ng-container>
+
