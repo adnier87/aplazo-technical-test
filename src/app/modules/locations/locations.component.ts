@@ -1,7 +1,8 @@
+import { literalMap } from '@angular/compiler';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as _ from 'lodash';
 import { map, Subject, takeUntil } from 'rxjs';
-import { IAPIResponse, ILocation, ILocationsResponse } from 'src/app/interfaces/api.interface';
+import { IAPIResponse, ICharacter, ILocation, ILocationsResponse } from 'src/app/interfaces/api.interface';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class LocationsComponent implements OnInit, OnDestroy {
 
   nextPage : number | null = 1;
   locations : ILocation[] = [];
+  residents : ICharacter[] = [];
+  locationName : string = ''; // Will be use for displaying, in modal, the name of the location which is selected to show its residents
 
   constructor(private api : ApiService) {}
 
@@ -42,6 +45,12 @@ export class LocationsComponent implements OnInit, OnDestroy {
     if (this.nextPage) {
       this.fetchLocations(this.nextPage)
     }
+  }
+
+  showResidents(id : string) : void {
+    const location = this.locations.find(l => l.id === id);
+    this.locationName = location?.name || '';
+    this.residents = location?.residents || [];
   }
 
   ngOnDestroy(): void {
