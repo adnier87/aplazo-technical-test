@@ -64,3 +64,22 @@ query getLocations($page : Int!) {
   }
 }
 `;
+
+export const GET_EPISODES = gql`
+  query getEpisodes($page : Int!) {
+    episodes(page : $page) {
+      info {
+        next
+      }
+      results {
+        id
+        name
+        episode
+        characters {
+          name
+          image
+        }
+      }
+    }
+  }
+`;
