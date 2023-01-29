@@ -16,6 +16,7 @@ export interface IEpisode {
     id: string;
     episode: string;
     name: string;
+    characters : ICharacter[]
 }
 
 export interface ICharacter {
@@ -51,6 +52,13 @@ export interface ICharacterResponse {
     character: ICharacter
 }
 
+export interface IEpisodesResponse {
+    episodes : {
+        info : IInfo,
+        results : IEpisode[]
+    }
+}
+
 export interface IAPIResponse {
-    data : ICharactersResponse | ICharacterResponse | ILocationsResponse
+    data : ICharactersResponse | ICharacterResponse | ILocationsResponse | IEpisodesResponse
 }

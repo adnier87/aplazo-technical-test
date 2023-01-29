@@ -1,1 +1,41 @@
-<p>episodes works!</p>
+<ng-container *ngIf="hasEpisodes()">
+    <div class="container d-flex flex-wrap">
+        <ng-container *ngFor="let item of episodes">
+            <div class="col-3 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.episode}}: {{ item.name }}</h5>
+                        
+                        <button (click)="showCharacters(item.id)" type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#charactersModal">
+                            Show characters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="d-grid col-6 my-5 mx-auto">
+        <button class="btn btn-lg btn-outline-primary" *ngIf="nextPage" (click)="loadMore()">Load more...</button>
+    </div>
+
+    <div class="modal fade" id="charactersModal" #modal tabindex="-1" aria-labelledby="charactersModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="charactersModalLabel">Characters who have been seen in the episode {{ episodeName }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li class="align-items-center d-flex mb-4" *ngFor="let character of characters">
+                        <img class="w-25" [src]="character.image" />
+                        <p class="ms-3 mb-0">{{ character.name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+</ng-container>
+
+
