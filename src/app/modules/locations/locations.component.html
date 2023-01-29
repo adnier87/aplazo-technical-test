@@ -5,7 +5,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.name }}</h5>
-                        <h6>Dimension: </h6>{{ item.dimension }}
+                        <h6>Dimension</h6>
+                        <p class="ms-3">{{ item.dimension }}</p>
+                        
+                        <button (click)="showResidents(item.id)" type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#residentsModal">
+                            Show residents
+                        </button>
                     </div>
                 </div>
             </div>
@@ -13,6 +18,25 @@
     </div>
     <div class="d-grid col-6 my-5 mx-auto">
         <button class="btn btn-lg btn-outline-primary" *ngIf="nextPage" (click)="loadMore()">Load more...</button>
+    </div>
+
+    <div class="modal fade" id="residentsModal" #modal tabindex="-1" aria-labelledby="residentsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="residentsModalLabel">Characters who have been last seen in {{ locationName }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li class="align-items-center d-flex mb-4" *ngFor="let resident of residents">
+                        <img class="w-25" [src]="resident.image" />
+                        <p class="ms-3 mb-0">{{ resident.name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
     </div>
 </ng-container>
 
