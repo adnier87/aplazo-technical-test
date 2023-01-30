@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { catchError, map, mergeMap, of } from 'rxjs';
+import { ICharactersResponse } from 'src/app/interfaces/api.interface';
 import { ApiService } from 'src/app/services/api.service';
 import {
     fetchCharacter,
@@ -21,11 +22,11 @@ export class CharactersEffects {
     getCharacters = createEffect(() =>
         this.actions.pipe(
             ofType(fetchCharacters),
-            exhaustMap(action =>
+            mergeMap(action =>
                 this.apiService.getCharacters(action.page).pipe(
                     map(response => {
                         console.log('fetch characters response::: ', response)
-                        return fetchCharactersSuccess({ response })
+                        return fetchCharactersSuccess({ ...(response.data as ICharactersResponse).characters })
                     }),
                     catchError((error : any) => of(fetchCharactersFailure(error)))
                 )
@@ -36,7 +37,7 @@ export class CharactersEffects {
     getCharacter = createEffect(() =>
         this.actions.pipe(
             ofType(fetchCharacter),
-            exhaustMap(action =>
+            mergeMap(action =>
                 this.apiService.getCharacters(action.id).pipe(
                     map(response => {
                         console.log('fetch characters response::: ', response)

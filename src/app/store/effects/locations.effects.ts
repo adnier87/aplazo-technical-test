@@ -5,7 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { fetch, fetchFailure, fetchSuccess } from '../actions/locations.actions';
 
 @Injectable()
-export class CharactersEffects {
+export class LocationsEffects {
     constructor(
         private actions : Actions,
         private apiService : ApiService
@@ -14,15 +14,15 @@ export class CharactersEffects {
     getLocations = createEffect(() =>
         this.actions.pipe(
             ofType(fetch),
-            exhaustMap(action =>
-                this.apiService.getCharacters(action.page).pipe(
+            exhaustMap(action => {console.log('action::: ', action)
+                return this.apiService.getCharacters(action.page).pipe(
                     map(response => {
                         console.log('fetch characters response::: ', response)
                         return fetchSuccess({ response })
                     }),
                     catchError((error : any) => of(fetchFailure(error)))
                 )
-            )
+            })
         )
     )
 }

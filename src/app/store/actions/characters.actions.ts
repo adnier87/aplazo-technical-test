@@ -1,12 +1,12 @@
 import { createAction, props } from "@ngrx/store";
 
 
-export const FETCH_CHARACTERS = '[Characters] fetching';
-export const FETCH_CHARACTERS_SUCCESS = '[Characters] successful fetching';
-export const FETCH_CHARACTERS_FAILURE = '[Characters] failed fetching';
-export const FETCH_CHARACTER = '[Character] fetching';
-export const FETCH_CHARACTER_SUCCESS = '[Character] successful fetching';
-export const FETCH_CHARACTER_FAILURE = '[Character] failed fetching';
+const FETCH_CHARACTERS = '[Characters] fetching';
+const FETCH_CHARACTERS_SUCCESS = '[Characters] successful fetching';
+const FETCH_CHARACTERS_FAILURE = '[Characters] failed fetching';
+const FETCH_CHARACTER = '[Character] fetching';
+const FETCH_CHARACTER_SUCCESS = '[Character] successful fetching';
+const FETCH_CHARACTER_FAILURE = '[Character] failed fetching';
 
 export const fetchCharacters = createAction(
     FETCH_CHARACTERS,

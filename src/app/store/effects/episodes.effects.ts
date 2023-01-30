@@ -5,7 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { fetch, fetchFailure, fetchSuccess } from '../actions/episodes.actions';
 
 @Injectable()
-export class CharactersEffects {
+export class EpisodesEffects {
     constructor(
         private actions : Actions,
         private apiService : ApiService
