@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-import { ICharacter } from "src/app/interfaces/api.interface";
 
 
 export const FETCH_CHARACTERS = '[Characters] fetching';
@@ -11,7 +10,7 @@ export const FETCH_CHARACTER_FAILURE = '[Character] failed fetching';
 
 export const fetchCharacters = createAction(
     FETCH_CHARACTERS,
-    props<{characters : ICharacter[]}>()
+    props<{page : number}>()
 )
 
 export const fetchCharactersSuccess = createAction(
@@ -26,7 +25,7 @@ export const fetchCharactersFailure = createAction(
 
 export const fetchCharacter = createAction(
     FETCH_CHARACTER,
-    props<{character : ICharacter}>()
+    props<{id : number}>()
 )
 
 export const fetchCharacterSuccess = createAction(

@@ -8,7 +8,7 @@ export const FETCH_EPISODES_FAILURE = '[Locations] failed fetching';
 
 export const fetch = createAction(
     FETCH_EPISODES,
-    props<{episodes : IEpisode[]}>()
+    props<{page : number}>()
 )
 
 export const fetchSuccess = createAction(

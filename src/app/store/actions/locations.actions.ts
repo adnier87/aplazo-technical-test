@@ -8,7 +8,7 @@ export const FETCH_LOCATIONS_FAILURE = '[Locations] failed fetching';
 
 export const fetch = createAction(
     FETCH_LOCATIONS,
-    props<{locations : ILocation[]}>()
+    props<{page : number}>()
 )
 
 export const fetchSuccess = createAction(
