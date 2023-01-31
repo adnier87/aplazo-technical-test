@@ -20,15 +20,13 @@ const initialState : CharactersState = {
 const fetchCharactersReducer = createReducer(
     initialState,
     on(fetchCharacters, (state) => ({...state, isLoading : true})),
-    on(fetchCharactersSuccess, (state, characters) => {
-        console.log('from reducer::: ', state)
-        return {
+    on(fetchCharactersSuccess, (state, characters) => ({
         ...state,
         characters,
         isLoading : false,
         isSuccessful : true,
         isFailed : false
-    }}),
+    })),
     on(fetchCharactersFailure, (state, message) => ({
         ...state,
         errorMessage : message,

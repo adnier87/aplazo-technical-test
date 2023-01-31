@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+import { ILocationsResponse } from 'src/app/interfaces/api.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { fetch, fetchFailure, fetchSuccess } from '../actions/locations.actions';
 
@@ -14,11 +15,11 @@ export class LocationsEffects {
     getLocations = createEffect(() =>
         this.actions.pipe(
             ofType(fetch),
-            exhaustMap(action => {console.log('action::: ', action)
-                return this.apiService.getCharacters(action.page).pipe(
+            exhaustMap(action => {
+                return this.apiService.getLocations(action.page).pipe(
                     map(response => {
-                        console.log('fetch characters response::: ', response)
-                        return fetchSuccess({ response })
+                        console.log('fetch locations response::: ', response)
+                        return fetchSuccess({ ...(response.data as ILocationsResponse).locations })
                     }),
                     catchError((error : any) => of(fetchFailure(error)))
                 )

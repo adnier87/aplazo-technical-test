@@ -10,10 +10,13 @@ import { AppComponent } from './app.component';
 import { CharactersModule } from './modules/characters/characters.module';
 import { GraphqlModule } from './modules/graphql/graphql.module';
 import { reducer as charactersReducer } from './store/reducers/characters.reducer';
+import { reducer as locationsReducer } from './store/reducers/locations.reducer';
 import { CharactersEffects } from './store/effects/characters.effects';
+import { LocationsEffects } from './store/effects/locations.effects';
 
 const reducers = {
-  characters : charactersReducer
+  characters : charactersReducer,
+  locations : locationsReducer
 }
 
 @NgModule({
@@ -29,7 +32,8 @@ const reducers = {
     HttpClientModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
-      CharactersEffects
+      CharactersEffects,
+      LocationsEffects
     ])
   ],
   providers: [],
