@@ -1,9 +1,10 @@
-import { literalMap } from '@angular/compiler';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as _ from 'lodash';
-import { map, Subject, takeUntil } from 'rxjs';
-import { IAPIResponse, ICharacter, ILocation, ILocationsResponse } from 'src/app/interfaces/api.interface';
-import { ApiService } from 'src/app/services/api.service';
+import { Subject, takeUntil } from 'rxjs';
+
+import { ICharacter, ILocation } from 'src/app/interfaces/api.interface';
+import { fetch, fetchSuccess } from 'src/app/store/actions/locations.actions';
 
 @Component({
   selector: 'app-locations',
@@ -19,22 +20,26 @@ export class LocationsComponent implements OnInit, OnDestroy {
   residents : ICharacter[] = [];
   locationName : string = ''; // Will be use for displaying, in modal, the name of the location which is selected to show its residents
 
-  constructor(private api : ApiService) {}
+  constructor(private store : Store) {
+    this.store.select(createSelector(
+      createFeatureSelector('locations'),
+      fetchSuccess
+    )).pipe(
+      takeUntil(this.unsubcriber)
+    ).subscribe(data => {
+      if (!data.isLoading) {
+        this.nextPage = data?.locations?.info ? data.locations.info.next : 1
+        this.locations = this.locations.concat(data?.locations?.results || [])
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.fetchLocations(this.nextPage as number)
   }
 
   fetchLocations(page : number) : void {
-    this.api.getLocations(page)
-      .pipe(
-        takeUntil(this.unsubcriber),
-        map((response : IAPIResponse) => (response.data as ILocationsResponse).locations) 
-      )
-      .subscribe(response => {
-        this.nextPage = response.info.next
-        this.locations = this.locations.concat(response.results)
-      })
+    this.store.dispatch(fetch({page}));
   }
 
   hasLocatiosn() : boolean {
