@@ -1,9 +1,9 @@
 import { createAction, props } from "@ngrx/store";
 
 
-const FETCH_EPISODES = '[Locations] fetching';
-const FETCH_EPISODES_SUCCESS = '[Locations] successful fetching';
-const FETCH_EPISODES_FAILURE = '[Locations] failed fetching';
+const FETCH_EPISODES = '[Episodes] fetching';
+const FETCH_EPISODES_SUCCESS = '[Episodes] successful fetching';
+const FETCH_EPISODES_FAILURE = '[Episodes] failed fetching';
 
 export const fetch = createAction(
     FETCH_EPISODES,

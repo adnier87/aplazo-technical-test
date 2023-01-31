@@ -11,12 +11,15 @@ import { CharactersModule } from './modules/characters/characters.module';
 import { GraphqlModule } from './modules/graphql/graphql.module';
 import { reducer as charactersReducer } from './store/reducers/characters.reducer';
 import { reducer as locationsReducer } from './store/reducers/locations.reducer';
+import { reducer as episodesReducer } from './store/reducers/episodes.reducer';
 import { CharactersEffects } from './store/effects/characters.effects';
 import { LocationsEffects } from './store/effects/locations.effects';
+import { EpisodesEffects } from './store/effects/episodes.effects';
 
 const reducers = {
   characters : charactersReducer,
-  locations : locationsReducer
+  locations : locationsReducer,
+  episodes : episodesReducer
 }
 
 @NgModule({
@@ -33,7 +36,8 @@ const reducers = {
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       CharactersEffects,
-      LocationsEffects
+      LocationsEffects,
+      EpisodesEffects
     ])
   ],
   providers: [],

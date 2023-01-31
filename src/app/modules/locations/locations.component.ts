@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as _ from 'lodash';
-import { map, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
-import { IAPIResponse, ICharacter, ILocation, ILocationsResponse } from 'src/app/interfaces/api.interface';
+import { ICharacter, ILocation } from 'src/app/interfaces/api.interface';
 import { fetch, fetchSuccess } from 'src/app/store/actions/locations.actions';
 
 @Component({

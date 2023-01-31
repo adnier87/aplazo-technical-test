@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as _ from 'lodash';
-import { Subject, takeUntil, map } from 'rxjs'
+import { Subject, takeUntil, map } from 'rxjs';
+
 import { IAPIResponse, ICharacter, IEpisode, IEpisodesResponse } from 'src/app/interfaces/api.interface';
-import { ApiService } from 'src/app/services/api.service';
+import { fetch, fetchSuccess } from 'src/app/store/actions/episodes.actions';
 
 @Component({
   selector: 'app-episodes',
@@ -17,22 +19,26 @@ export class EpisodesComponent {
   characters : ICharacter[] = [];
   episodeName : string = '';
 
-  constructor(private api : ApiService) {}
+  constructor(private store : Store) {
+    this.store.select(createSelector(
+      createFeatureSelector('episodes'),
+      fetchSuccess
+    )).pipe(
+      takeUntil(this.unsubcriber)
+    ).subscribe(data => {
+      if (!data.isLoading) {
+        this.nextPage = data?.episodes?.info ? data.episodes.info.next : 1
+        this.episodes = this.episodes.concat(data?.episodes?.results || [])
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.fetchEpisodes(this.nextPage as number)
   }
 
   fetchEpisodes(page : number) : void {
-    this.api.getEpisodes(page)
-      .pipe(
-        takeUntil(this.unsubcriber),
-        map((response : IAPIResponse) => (response.data as IEpisodesResponse).episodes) 
-      )
-      .subscribe(response => {
-        this.nextPage = response.info.next
-        this.episodes = this.episodes.concat(response.results)
-      })
+    this.store.dispatch(fetch({page}))
   }
 
   showCharacters(id : string) : void {
