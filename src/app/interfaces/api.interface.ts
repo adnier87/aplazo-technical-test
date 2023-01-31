@@ -6,10 +6,10 @@ export interface IInfo {
 }
 
 export interface ILocation {
-    id: string;
-    name: string;
-    dimension : string;
-    residents : ICharacter[]
+    id?: string;
+    name?: string;
+    dimension? : string;
+    residents? : ICharacter[]
 }
 
 export interface IEpisode {
@@ -20,16 +20,16 @@ export interface IEpisode {
 }
 
 export interface ICharacter {
-    id: string;
-    name: string;
-    image: string;
-    location: ILocation;
-    status: string;
-    species: string;
-    type: string;
-    gender: string;
-    episode: IEpisode[];
-    origin: ILocation;
+    id?: string;
+    name?: string;
+    image?: string;
+    location?: ILocation;
+    status?: string;
+    species?: string;
+    type?: string;
+    gender?: string;
+    episode?: IEpisode[];
+    origin?: ILocation;
 }
 
 export interface ICharactersData {

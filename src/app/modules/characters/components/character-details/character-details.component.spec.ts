@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
 import { CharacterDetailsComponent } from './character-details.component';
 
@@ -8,7 +11,19 @@ describe('CharacterDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CharacterDetailsComponent ]
+      declarations: [ CharacterDetailsComponent ],
+      imports: [
+        RouterTestingModule,
+        ApolloTestingModule
+      ],
+      providers:[
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot : { paramMap : convertToParamMap( { id : '1' } ) }
+          }
+        }
+      ]
     })
     .compileComponents();
 
